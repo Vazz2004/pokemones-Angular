@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">Lista de Pokémones</h1>
+      <p class="text-gray-600">Explora todos los pokémones disponibles</p>
+    </div>
+
+    @if(pokemones$ | async; as pokemones) {
+      @if(pokemones.length > 0) {
+        <!-- Grid de pokémones -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          @for (pokemon of pokemones; track pokemon.id) {
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
+              <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-xl p-4 text-white">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-semibold">#{{ pokemon.id }}</span>
+                  <span class="text-xs bg-white/20 px-2 py-1 rounded-full">{{ pokemon.tipo }}</span>
+                </div>
+              </div>
+
+              <div class="p-4 text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-yellow-400 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  {{ pokemon.nombre.charAt(0).toUpperCase() }}
+                </div>
+
+                <h3 class="font-bold text-lg text-gray-800 mb-1">{{ pokemon.nombre }}</h3>
+                <p class="text-gray-500 text-sm mb-3">{{ pokemon.raza }}</p>
+
+                <div class="flex gap-2 justify-center">
+                  <span class="px-4 py-2 bg-blue-100 text-blue-700 text-sm rounded-lg">
+                    Tipo: {{ pokemon.tipo }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg py-2 px-4 inline-block">
+            Mostrando <span class="font-bold text-blue-600">{{ pokemones.length }}</span> pokémones
+          </p>
+        </div>
+      } @else {
+        <!-- Sin resultados -->
+        <div class="text-center py-16">
+          <p class="text-gray-600 text-lg">No se encontraron pokémones</p>
+        </div>
+      }
+    } @else {
+      <!-- Estado de carga -->
+      <div class="flex justify-center items-center py-16">
+        <div class="text-center">
+          <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p class="text-gray-600 text-lg">Cargando pokémones...</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>

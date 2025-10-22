@@ -1,0 +1,20 @@
+<nav class="bg-gray-900 text-white p-4 flex justify-between items-center">
+  <div class="text-xl font-bold">🌿 Api Pokemon</div>
+
+  <!-- Botón de menú móvil -->
+  <button
+    class="md:hidden text-white focus:outline-none"
+    (click)="toggleMenu()"
+  >
+    ☰
+  </button>
+
+  <!-- Menú -->
+  <ul
+    class="md:flex md:space-x-6 absolute md:static bg-gray-900 w-full left-0 top-16 md:top-auto md:w-auto transition-all duration-300"
+    [class.hidden]="!menuopen"
+  >
+    <li><a routerLink="/" class="block p-2 hover:text-green-400">Inicio</a></li>
+    <li><a routerLink="/lista-pokemones" class="block p-2 hover:text-green-400">Lista de pokemones</a></li>
+  </ul>
+</nav>
